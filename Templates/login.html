@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}Login | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+  <h2 style="color: #C7372C; margin-bottom: 20px;">Welcome Back</h2>
+  <p style="margin-bottom: 30px; color: #D6D7D2;">Please log in to continue monitoring your appliances safely.</p>
+
+  <form method="POST" action="/login">
+    <label for="username"><i class="fas fa-user"></i> Username</label>
+    <input type="text" id="username" name="username" required placeholder="Enter your username" />
+
+    <label for="password"><i class="fas fa-lock"></i> Password</label>
+    <input type="password" id="password" name="password" required placeholder="Enter your password" />
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p style="margin-top: 20px; font-size: 14px;">
+    Don’t have an account?
+    <a href="/register" style="color: #C7372C; text-decoration: underline;">Register here</a>
+  </p>
+
+  {% if error %}
+  <p style="color: #FF6B6B; margin-top: 20px;">{{ error }}</p>
+  {% endif %}
+</div>
+{% endblock %}

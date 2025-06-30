@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %}Detection Results | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-container glass-box">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="section-heading" style="color: {% if not analysis.alert_required %}#28a745{% else %}#C7372C{% endif %};">
+            <i class="fas {% if not analysis.alert_required %}fa-check-circle{% else %}fa-exclamation-triangle{% endif %}"></i>
+            {% if not analysis.alert_required %}
+                Safe Environment Detected
+            {% else %}
+                Potential Hazard Detected!
+            {% endif %}
+        </h2>
+        <span style="color: #94938F;">
+            <i class="fas fa-clock"></i> {{ analysis.timestamp }}
+        </span>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Image Column -->
+        <div class="col-md-6 mb-4">
+            {% if image_path %}
+            <div class="glass-box" style="padding: 15px;">
+                <h5 style="color: #D6D7D2; margin-bottom: 15px;">
+                    <i class="fas fa-image"></i> Processed Image
+                </h5>
+                <img src="{{ image_path }}" class="img-fluid rounded" alt="Detection Result" style="border: 2px solid rgba(255,255,255,0.1);">
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Stats Column -->
+        <div class="col-md-6">
+            <div class="glass-box" style="padding: 20px;">
+                <h5 style="color: #D6D7D2; margin-bottom: 20px;">
+                    <i class="fas fa-chart-bar"></i> Detection Summary
+                </h5>
+                
+                <div class="alert-list">
+                    <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span><i class="fas fa-users"></i> People Detected</span>
+                        <span class="badge bg-primary">{{ analysis.person_count }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <span><i class="fas fa-plug"></i> Appliances Detected</span>
+                        <span class="badge bg-primary">{{ analysis.appliances|length }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center py-2">
+                        <span><i class="fas fa-bell"></i> Alert Status</span>
+                        <span class="badge {% if not analysis.alert_required %}bg-success{% else %}bg-danger{% endif %}">
+                            {% if not analysis.alert_required %}No Alert Needed{% else %}Alert Required{% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if analysis.appliances %}
+    <div class="glass-box mt-4" style="padding: 20px;">
+        <h5 style="color: #D6D7D2; margin-bottom: 20px;">
+            <i class="fas fa-list"></i> Detected Appliances
+        </h5>
+        
+        <div class="row">
+            {% for appliance in analysis.appliances %}
+            <div class="col-md-4 mb-3">
+                <div class="glass-box" style="padding: 15px; height: 100%;">
+                    <h6 style="color: #D6D7D2;">
+                        <i class="fas 
+                            {% if 'oven' in appliance.name.lower() or 'stove' in appliance.name.lower() %}fa-fire
+                            {% elif 'iron' in appliance.name.lower() %}fa-bolt
+                            {% else %}fa-plug{% endif %}">
+                        </i> 
+                        {{ appliance.name }}
+                    </h6>
+                    <div class="progress mt-2" style="height: 8px; background-color: rgba(255,255,255,0.1);">
+                        <div class="progress-bar 
+                            {% if appliance.confidence > 70 %}bg-success
+                            {% elif appliance.confidence > 40 %}bg-warning
+                            {% else %}bg-danger{% endif %}" 
+                            role="progressbar" 
+                            style="width: {{ appliance.confidence }}%">
+                        </div>
+                    </div>
+                    <small style="color: #94938F;">{{ appliance.confidence }}% confidence</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="/detect/images" class="logout-btn">
+            <i class="fas fa-redo"></i> Test Another Image
+        </a>
+        <a href="/dashboard" class="logout-btn">
+            <i class="fas fa-home"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}Register | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+  <h2 style="color: #C7372C; margin-bottom: 20px;">Create Your Account</h2>
+  <p style="margin-bottom: 30px; color: #D6D7D2;">Sign up to get appliance safety alerts and monitoring dashboard access.</p>
+
+  <form method="POST" action="/register">
+    <label for="name"><i class="fas fa-user-circle"></i> Full Name</label>
+    <input type="text" id="name" name="name" required placeholder="Your full name" />
+
+    <label for="username"><i class="fas fa-user"></i> Username</label>
+    <input type="text" id="username" name="username" required placeholder="Choose a username" />
+
+    <label for="password"><i class="fas fa-lock"></i> Password</label>
+    <input type="password" id="password" name="password" required placeholder="Create a password" />
+
+    <label for="phone"><i class="fas fa-phone-alt"></i> Your Phone Number</label>
+    <input type="tel" id="phone" name="phone_number" required placeholder="e.g. +919876543210" />
+
+    <label for="trusted1"><i class="fas fa-user-friends"></i> Trusted Contact #1</label>
+    <input type="tel" id="trusted1" name="trusted_contacts" required placeholder="e.g. +919812345678" />
+
+    <label for="trusted2"><i class="fas fa-user-friends"></i> Trusted Contact #2</label>
+    <input type="tel" id="trusted2" name="trusted_contacts2" required placeholder="e.g. +919812345679" />
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p style="margin-top: 20px; font-size: 14px;">
+    Already have an account?
+    <a href="/login" style="color: #C7372C; text-decoration: underline;">Login here</a>
+  </p>
+
+  {% if error %}
+  <p style="color: #FF6B6B; margin-top: 20px;">{{ error }}</p>
+  {% endif %}
+</div>
+{% endblock %}

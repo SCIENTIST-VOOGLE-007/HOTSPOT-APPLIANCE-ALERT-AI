@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block title %}Batch Image Detection | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="glass-box">
+    <h2 class="section-heading" style="color: #C7372C;">Batch Image Detection</h2>
+    
+    <div class="input-methods-grid">
+        <div class="dashboard-card">
+            <i class="fas fa-images"></i>
+            <span>Upload Multiple Images</span>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('detect_image_directory') }}" enctype="multipart/form-data" class="mb-4">
+        <div class="mb-3">
+            <label for="images" class="form-label">Select multiple images:</label>
+            <input class="form-control" type="file" id="images" name="images" multiple accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-play"></i> Process Images
+        </button>
+    </form>
+
+    {% if results %}
+    <div class="results-container mt-4">
+        <h3 class="mb-3">Detection Results</h3>
+        
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for result in results %}
+            <div class="col">
+                <div class="card bg-dark text-white h-100">
+                    <img src="{{ url_for('static', filename='results/batch/' + result.filename) }}" class="card-img-top" alt="Processed image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ result.filename }}</h5>
+                        
+                        <div class="alert {% if not result.analysis.alert_required %}alert-success{% else %}alert-danger{% endif %} mb-3">
+                            <h6 class="alert-heading">
+                                {% if not result.analysis.alert_required %}
+                                    <i class="fas fa-check-circle"></i> Safe Environment
+                                {% else %}
+                                    <i class="fas fa-exclamation-triangle"></i> Potential Hazard!
+                                {% endif %}
+                            </h6>
+                        </div>
+                        
+                        <div class="analysis-details">
+                            <p><strong><i class="fas fa-user"></i> Persons:</strong> {{ result.analysis.person_count }}</p>
+                            <p><strong><i class="fas fa-plug"></i> Appliances:</strong> 
+                                {% if result.analysis.appliances %}
+                                    {{ result.analysis.appliances|join(', ') }}
+                                {% else %}
+                                    None detected
+                                {% endif %}
+                            </p>
+                            <p><strong><i class="fas fa-clock"></i> Timestamp:</strong> {{ result.analysis.timestamp }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-img-top {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .analysis-details {
+        background: rgba(30, 30, 30, 0.6);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+    }
+    
+    .alert {
+        border-radius: 8px;
+        border: none;
+    }
+    
+    .alert-success {
+        background-color: rgba(40, 167, 69, 0.2);
+        color: #28a745;
+    }
+    
+    .alert-danger {
+        background-color: rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.7; }
+        100% { opacity: 1; }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}Image Detection | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-container glass-box">
+    <h2 class="section-heading" style="color: #C7372C;">Image Detection</h2>
+    <p style="color: #D6D7D2; font-size: 16px; margin-bottom: 20px;">
+        Upload an image to detect appliances and potential hazards
+    </p>
+
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="imageUpload" class="form-label">
+                    <i class="fas fa-image"></i> Select Image
+                </label>
+                <input class="form-control" type="file" id="imageUpload" name="image" required>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i> Detect Appliances
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <a href="/dashboard" class="logout-btn">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

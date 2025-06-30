@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-container glass-box">
+  <h2 class="section-heading" style="color: #C7372C;">Welcome, {{ session['username'] }}!</h2>
+  <p style="color: #D6D7D2; font-size: 16px; margin-bottom: 20px;">
+    Choose how you want to run Appliance Detection:
+  </p>
+
+  <div class="input-methods-grid">
+    <a href="/detect/image" class="dashboard-card">
+      <i class="fas fa-image"></i>
+      <span>Test Single Image</span>
+    </a>
+
+    <a href="/detect/images" class="dashboard-card"> <!-- Updated URL -->
+      <i class="fas fa-images"></i>
+      <span>Test Image Directory</span>
+    </a>
+
+    <a href="/detect/video" class="dashboard-card">
+      <i class="fas fa-video"></i>
+      <span>Test Video File</span>
+    </a>
+
+    <a href="/detect/webcam" class="dashboard-card">
+      <i class="fas fa-camera"></i>
+      <span>Live Webcam Detection</span>
+    </a>
+  </div>
+
+  <h3 style="color: #710D0B; margin-top: 40px;">Latest Alerts</h3>
+  <div class="alerts-box">
+    {% if alerts %}
+      <ul class="alert-list">
+        {% for alert in alerts %}
+          <li>
+            <i class="fas fa-exclamation-triangle" style="color: #C7372C;"></i>
+            <strong>{{ alert['timestamp'] }}</strong> — {{ alert['message'] }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p style="color: #94938F;">No recent alerts! All safe ✅</p>
+    {% endif %}
+  </div>
+
+  <div style="margin-top: 40px;">
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+</div>
+{% endblock %}

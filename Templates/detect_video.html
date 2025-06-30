@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Detect Video | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-container glass-box">
+  <h2 class="section-heading" style="color: #C7372C;">Detect Video File</h2>
+  
+  <form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="video" class="form-label">Upload Video File:</label>
+      <input type="file" class="form-control" id="video" name="video" accept="video/*" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Detect</button>
+    <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  </form>
+</div>
+{% endblock %}

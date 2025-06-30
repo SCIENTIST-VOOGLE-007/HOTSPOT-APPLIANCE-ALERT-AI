@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Detect Images | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-container glass-box">
+  <h2 class="section-heading" style="color: #C7372C;">Detect Multiple Images</h2>
+  
+  <form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="images" class="form-label">Upload Multiple Images:</label>
+      <input type="file" class="form-control" id="images" name="images" multiple required>
+    </div>
+    <button type="submit" class="btn btn-primary">Detect</button>
+    <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  </form>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+{% endblock %}

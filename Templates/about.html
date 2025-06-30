@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}About | Appliance Alert AI{% endblock %}
+
+{% block content %}
+<div class="about-container glass-box">
+  <h2 style="color: #C7372C;">About Appliance Alert AI</h2>
+  <p style="color: #D6D7D2; margin-top: 15px;">
+    <strong>Appliance Alert AI</strong> is an intelligent real-time detection system built to prevent common household fire hazards.
+    Using computer vision powered by <strong>YOLOv8</strong>, it identifies appliances like stoves, toasters, or irons left on without supervision and triggers alerts if no person is detected nearby.
+  </p>
+
+  <h3 style="color: #710D0B; margin-top: 30px;">Key Features</h3>
+  <ul class="feature-list">
+    <li><i class="fas fa-bolt"></i> Real-time appliance and person detection via webcam or video</li>
+    <li><i class="fas fa-user-shield"></i> User login, registration, and secure access</li>
+    <li><i class="fas fa-bell"></i> Emergency alerts via <strong>WhatsApp API</strong> to trusted contacts</li>
+    <li><i class="fas fa-images"></i> Upload images, directories, or use webcam input</li>
+    <li><i class="fas fa-laptop-code"></i> Cloud-ready with support for deployment</li>
+    <li><i class="fas fa-lock"></i> Built-in security features and input validation</li>
+  </ul>
+
+  <h3 style="color: #710D0B; margin-top: 30px;">Why We Built This</h3>
+  <p style="color: #D6D7D2;">
+    This project was created for the <strong>VisionX Hackathon</strong> to address a real-world safety challenge using AI.
+    Many accidents happen due to unsupervised appliances — our solution leverages vision intelligence and instant messaging to prevent them.
+  </p>
+
+  <h3 style="color: #710D0B; margin-top: 30px;">Technology Stack</h3>
+  <ul class="tech-stack">
+    <li><i class="fas fa-microchip"></i> Python & OpenCV</li>
+    <li><i class="fas fa-brain"></i> YOLOv8 from Ultralytics</li>
+    <li><i class="fas fa-server"></i> MongoDB for user storage</li>
+    <li><i class="fas fa-cloud-upload-alt"></i> Flask for backend</li>
+    <li><i class="fab fa-whatsapp"></i> WhatsApp Cloud API for alerts</li>
+  </ul>
+
+  <p style="color: #D6D7D2; margin-top: 40px; font-size: 14px;">
+    💡 Built with passion, precision, and purpose by aspiring innovators at the <strong>VisionX Hackathon</strong>.
+  </p>
+</div>
+{% endblock %}

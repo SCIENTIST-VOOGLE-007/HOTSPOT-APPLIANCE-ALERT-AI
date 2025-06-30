@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Detection Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        img { max-width: 100%; height: auto; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Image Detection Result</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: {% if 'success' in message[1] %}green{% else %}red{% endif %};">{{ message[0] }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% if image_path %}
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Detected Image">
+    {% else %}
+        <p>No image to display.</p>
+    {% endif %}
+    {% if analysis %}
+        <h2>Analysis</h2>
+        <pre>{{ analysis | tojson(indent=2) | safe }}</pre>
+    {% endif %}
+    <a href="{{ url_for('detect_image') }}">Back to Detection</a>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+</body>
+</html>
