@@ -1,4 +1,3 @@
-# Vista-Hackathon
 # 🔥 HotSpot – Appliance Alert AI
 
 **Because safety should never be accidental.**
@@ -45,6 +44,16 @@ Built as a response to real-world safety concerns, HotSpot acts as your virtual 
 
 ---
 
+---
+
+## 🧠 Model Training
+
+1. YOLOv8 trained on a custom dataset with labels: stove, oven, microwave, toaster, person.
+2. Trained using Roboflow and Ultralytics API.
+3. Accuracy: 94% mAP @ IoU 0.5
+
+---
+
 ## 🧪 Detection Logic
 
 | Detected | Appliance ON | Person Nearby | Action            |
@@ -72,7 +81,7 @@ Built as a response to real-world safety concerns, HotSpot acts as your virtual 
 ![image](https://github.com/user-attachments/assets/8067af0e-e858-471a-a341-b6076c15e066)
 ![image](https://github.com/user-attachments/assets/f0dbefe9-0306-4889-8d13-fa703a18b7d8)
 ![image](https://github.com/user-attachments/assets/d26d50ec-dc1a-4565-a17f-865da651134e)
-![image](https://github.com/user-attachments/assets/c0905dba-60ca-4a37-852c-140fe5a464cc)
+![Screenshot 2025-06-30 060651](https://github.com/user-attachments/assets/9182d9cd-ed87-4c37-879f-e7e7e89a6a84)
 
 
 ### 🔧 Installation
@@ -89,31 +98,10 @@ python app.py
 
 Open your browser and go to http://127.0.0.1:5000/
 
-🧠 Model Training
-YOLOv8 trained on a custom dataset with labels: stove, oven, microwave, toaster, person.
-
-Trained using Roboflow and Ultralytics API.
-
-Accuracy: 94% mAP @ IoU 0.5
-
-📲 Sample WhatsApp Alert
-🚨 HotSpot Appliance Alert
-An appliance is ON and no person is nearby in the monitored area.
-Location: Kitchen – 2nd Floor
-Time: 2025-04-13 11:47 AM
-Please check immediately.
-
 🙌 Team & Vision
 HotSpot was built with a mission to prevent fire hazards through AI-powered automation. We're passionate about leveraging technology to make homes and communities safer, smarter, and more responsive.
 
-“The best tech is invisible — it quietly protects, empowers, and cares.”
-
-
-YOLOv8 – Ultralytics
-
-Twilio WhatsApp API
-
-Flask, MongoDB, OpenCV
+# “The best tech is invisible — it quietly protects, empowers, and cares.”
 
 📬 Want to Contribute?
 We’re open to feedback, suggestions, and collaborations. Feel free to fork the repo and drop a PR or issue!
